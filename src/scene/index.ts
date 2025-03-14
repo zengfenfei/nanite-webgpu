@@ -8,8 +8,8 @@ import { simplifyMesh } from '../meshPreprocessing/simplifyMesh.ts';
 import {
   getTriangleCount,
   getVertexCount,
-  printBoundingBox,
 } from '../utils/index.ts';
+import { getBoundingBox } from '../utils/index.ts';
 import {
   createGPU_VertexBuffer,
   createGPU_IndexBuffer,
@@ -34,7 +34,6 @@ export async function loadScene(
   const [originalVertices, originalIndices] = await loadObjFile(objText, scale);
   // prettier-ignore
   console.log(`Scene '${sceneName}': ${getVertexCount(originalVertices)} vertices, ${getTriangleCount(originalIndices)} triangles`);
-  printBoundingBox(originalVertices);
 
   const originalMesh = createOriginalMesh(
     device,
@@ -81,8 +80,12 @@ export async function loadScene(
     naniteMeshlets
   );
 
+  const boundingBox = getBoundingBox(originalVertices)
+  console.log('boundingBox', boundingBox)
+  
   return {
     mesh: originalMesh,
+    boundingBox,
     meshlets,
     meshoptimizerLODs: meshoptimizerLODs.map((e) => e[0]),
     meshoptimizerMeshletLODs,
@@ -110,6 +113,10 @@ function createOriginalMesh(
     vertexBuffer,
     ...getTriangleAndVertCounts(vertices, indices),
   };
+}
+
+function calMeshBounds() {
+
 }
 
 async function createMeshLODs(

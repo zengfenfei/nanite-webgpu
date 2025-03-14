@@ -9,11 +9,11 @@ import { SCENES, SceneFile } from './constants.ts';
 import { loadScene } from './scene/index.ts';
 
 //@ts-ignore it works OK
-import drawMeshShader from './passes/drawMeshPass.wgsl';
+import drawMeshShader from './passes/drawMeshPass.wgsl?raw';
 //@ts-ignore it works OK
-import dbgMeshoptimizerShader from './passes/dbgMeshoptimizerPass.wgsl';
+import dbgMeshoptimizerShader from './passes/dbgMeshoptimizerPass.wgsl?raw';
 //@ts-ignore it works OK
-import dbgMeshoptimizerMeshletsShader from './passes/dbgMeshoptimizerMeshletsPass.wgsl';
+import dbgMeshoptimizerMeshletsShader from './passes/dbgMeshoptimizerMeshletsPass.wgsl?raw';
 
 // fix some warnings if VSCode is in deno mode
 declare global {
@@ -58,6 +58,7 @@ const SCENE_FILE = 'bunny';
 
   // renderer setup
   const profiler = new GpuProfiler(device);
+
   injectShaderTexts({
     drawMeshShader,
     dbgMeshoptimizerShader,
@@ -80,9 +81,11 @@ const SCENE_FILE = 'bunny';
     showErrorMessage(lastError);
     return;
   }
-
+let id = 0
   // frame callback
   const frame = () => {
+    id++;
+    //console.log(id);
     errorSystem.startErrorScope('frame');
 
     fpsOnFrameEnd();
@@ -113,6 +116,9 @@ const SCENE_FILE = 'bunny';
     // submit commands
     profiler.endFrame(cmdBuf);
     device.queue.submit([cmdBuf.finish()]);
+    device.queue.onSubmittedWorkDone().then((e) => {
+      //console.log(id);
+    })
 
     profiler.scheduleRaportIfNeededAsync(onGpuProfilerResult);
 

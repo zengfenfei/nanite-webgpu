@@ -65,7 +65,7 @@ function getShaderTexts(): ShadersTexts {
 
 async function loadScene(device: GPUDevice, path: string) {
   const rawtext = await Deno.readTextFileSync(path);
-  const mesh = loadObjFile(device, rawtext);
+  const mesh = loadObjFile(rawtext, 1);
   return mesh;
 }
 

@@ -88,6 +88,7 @@ export class Renderer {
       'device' | 'cmdBuf' | 'profiler' | 'viewport' | 'scene' | 'screenTexture'
     >
   ) {
+    this.cameraCtrl.focusBoundingBox(_ctx.scene.boundingBox);
     const viewMatrix = this.cameraCtrl.viewMatrix;
     const mvpMatrix = getModelViewProjectionMatrix(
       viewMatrix,

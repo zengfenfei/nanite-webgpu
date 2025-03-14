@@ -7,7 +7,7 @@ let METIS_MODULE: WasmModule | undefined = undefined;
 
 /** Used in tests to point to local .wasm file */
 export const OVERRIDE_METIS_WASM_PATH = {
-  value: undefined as string | undefined,
+  value: 'static/metis.wasm' as string | undefined,
 };
 
 export async function getMetisModule() {

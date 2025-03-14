@@ -3,6 +3,7 @@ import { meshopt_Meshlets } from '../meshPreprocessing/createMeshlets.ts';
 export interface Scene {
   // meshes for debug
   mesh: Mesh;
+  boundingBox: {min: number[]; max: number[]};
   meshlets: MeshletRenderPckg;
   meshoptimizerLODs: Mesh[];
   meshoptimizerMeshletLODs: MeshletRenderPckg[];

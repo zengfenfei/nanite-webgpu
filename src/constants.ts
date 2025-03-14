@@ -7,7 +7,7 @@ export const CAMERA_CFG = {
   // projection
   fovDgr: 45,
   near: 0.01,
-  far: 100,
+  far: 1000,
 };
 
 export const BYTES_U8 = 1;
@@ -26,7 +26,8 @@ export const CO_PER_VERTEX: number = 3;
 export const VERTS_IN_TRIANGLE: number = 3;
 
 export const SCENES = {
-  bunny: { file: 'bunny.obj', scale: 8 },
+  //bunny: { file: 'static/Tile_+000_+013/Tile_+000_+013.obj', scale: 1 },
+  bunny: { file: 'static/bunny.obj', scale: 1 },
   cube: { file: 'cube.obj', scale: 1 },
   plane: { file: 'plane.obj', scale: 1 },
 };

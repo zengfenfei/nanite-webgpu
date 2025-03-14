@@ -113,8 +113,11 @@ ${DrawMeshPass.SHADER_CODE}
     const ms = scene.meshlets;
     renderPass.setVertexBuffer(0, ms.vertexBuffer);
     renderPass.setIndexBuffer(ms.indexBuffer, 'uint32');
+
     let nextIdx = 0;
     ms.meshlets.forEach((m, firstInstance) => {
+      console.log('meshlet triangle count', m.triangleCount);
+
       const vertexCount = m.triangleCount * VERTS_IN_TRIANGLE;
       const firstIndex = nextIdx;
       renderPass.drawIndexed(vertexCount, 1, firstIndex, 0, firstInstance);

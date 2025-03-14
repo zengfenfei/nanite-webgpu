@@ -66,7 +66,7 @@ export const lerp = (a: number, b: number, fac: number) => {
   return a * (1 - fac) + b * fac;
 };
 
-export function printBoundingBox(
+export function getBoundingBox(
   vertices: Float32Array,
   coPerVert = CO_PER_VERTEX
 ) {
@@ -82,9 +82,7 @@ export function printBoundingBox(
     }
   }
 
-  const p = (a: number[]) => '[' + a.map((x) => x.toFixed(2)).join(',') + ']';
-  console.log(`Bounding box min:`, p(minCo));
-  console.log(`Bounding box max:`, p(maxCo));
+  return { min: minCo, max: maxCo };
 }
 
 export const getTriangleCount = (indices: Uint32Array | number) =>

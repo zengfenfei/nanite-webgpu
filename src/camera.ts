@@ -12,12 +12,32 @@ type Mat4 = any;
 const UP = [0, 1, 0];
 
 export class Camera {
-  public readonly viewMatrix: Mat4;
+  public viewMatrix: Mat4;
 
   constructor(
     options: Pick<typeof CAMERA_CFG, 'position' | 'target'> = CAMERA_CFG
   ) {
     this.viewMatrix = mat4.lookAt(options.position, options.target, UP);
+  }
+
+  focusBoundingBox(boundingBox: { min: number[]; max: number[] }) {
+
+    const center = [
+      (boundingBox.min[0] + boundingBox.max[0]) / 2,
+      (boundingBox.min[1] + boundingBox.max[1]) / 2,
+      (boundingBox.min[2] + boundingBox.max[2]) / 2,
+    ];
+    const halfY = (boundingBox.max[1] - boundingBox.min[1]) / 2;
+    const halfZ = (boundingBox.max[2] - boundingBox.min[2]) / 2;
+    const halfX = (boundingBox.max[0] - boundingBox.min[0]) / 2;
+
+    const eye = [center[0], center[1], center[2] + halfY / Math.tan((CAMERA_CFG.fovDgr / 2) * Math.PI / 180) + halfZ];
+
+    this.viewMatrix = mat4.lookAt(
+      eye,
+      center,
+      UP
+    )
   }
 
   translate(x: number, y: number, z: number) {
