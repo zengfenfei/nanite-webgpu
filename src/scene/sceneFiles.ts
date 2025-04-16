@@ -26,6 +26,7 @@ const OBJECTS = {
   jinxFace: { file: 'jinx/jinx_face.obj', scale: 1, texture: 'jinx/jinx_face.png' },
   jinxHair: { file: 'jinx/jinx_hair.obj', scale: 1, texture: 'jinx/jinx_hair.png' },
   jinxCombined: { file: 'jinx-combined/jinx-combined.obj', scale: 1, texture: 'jinx-combined/jinx-combined.png' },
+  teapot: { file: 'newell_teaset/teapot.obj', scale: 0.3 },
 };
 export type SceneObjectName = keyof typeof OBJECTS;
 
@@ -83,6 +84,9 @@ export const SCENES = {
     ] as SceneObjectName[],
     instances: createGrid(100, 100, 1.0),
   },
+  teapot: [
+    sceneModel('teapot', 100, 5),
+  ]
 };
 
 export type SceneName = keyof typeof SCENES;
