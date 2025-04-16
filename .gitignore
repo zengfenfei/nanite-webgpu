@@ -17,6 +17,7 @@ yarn-error.log*
 
 
 # build
+dist/
 build
 static/*.pem
 

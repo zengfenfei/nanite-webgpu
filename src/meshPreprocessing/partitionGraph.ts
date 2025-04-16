@@ -7,14 +7,14 @@ let METIS_MODULE: WasmModule | undefined = undefined;
 
 /** Used in tests to point to local .wasm file */
 export const OVERRIDE_METIS_WASM_PATH = {
-  value: undefined as string | undefined,
+  value: 'static/' as string | undefined,
 };
 
 export async function getMetisModule() {
   if (METIS_MODULE !== undefined) return METIS_MODULE;
 
   const module: WasmModule = await MetisModule.default({
-    locateFile: (e: string) => OVERRIDE_METIS_WASM_PATH.value || e,
+    locateFile: (e: string) => OVERRIDE_METIS_WASM_PATH.value + e,
   });
   METIS_MODULE = module;
   return module;

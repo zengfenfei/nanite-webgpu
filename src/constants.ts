@@ -39,11 +39,11 @@ export const NANO_TO_MILISECONDS = 0.000001;
 export const MILISECONDS_TO_SECONDS = 0.001;
 
 // deno-lint-ignore no-window-prefix no-window
-export const IS_DENO = window.Deno !== undefined;
+export const IS_DENO = typeof Deno !== 'undefined';
 export const IS_BROWSER = !IS_DENO;
 export const IS_WGPU = IS_DENO;
 
-export const MODELS_DIR = IS_DENO ? 'static/models' : 'models';
+export const MODELS_DIR = 'static/models';
 
 export const DEPTH_FORMAT: GPUTextureFormat = 'depth24plus';
 /**
@@ -73,6 +73,7 @@ export const SHADING_MODE_NORMALS = 4;
 export const SHADING_MODE_HW_SW_IMPOSTOR = 5;
 
 export const CONFIG = {
+  sceneFile: 'bunny',
   /** Test env may require GPUBuffers to have extra COPY_* flags to readback results. Or silence console spam. */
   isTest: false,
   /** If we are not rendering the scene but only exporting the LOD hierarchy */

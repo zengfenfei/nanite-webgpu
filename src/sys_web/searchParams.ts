@@ -9,13 +9,13 @@ const PARAMS = {
   impostorsTextureSize: 'impostors_texturesize',
   impostorsForceOnlyBillboards: 'impostors_forceonlybillboards',
   naniteErrorThreshold: 'nanite_errorthreshold',
-};
+} as const;
 
 export const INVALID_SEARCH_PARAMS: string[] = [];
 
 export function applySearchParams(
   target: typeof CONFIG,
-  defaultScene: SceneName
+  defaultScene: SceneName,
 ): SceneName {
   const params = new URLSearchParams(window.location.search);
 
@@ -68,8 +68,12 @@ export function applySearchParams(
 
     console.log(`Loading scene '${defaultScene}', config: `, target);
   }
-
+  CONFIG.sceneFile = defaultScene;
   return defaultScene;
+}
+
+export function setSceneName(name: string) {
+  location.search = "?" + PARAMS.sceneFile + "=" + name;
 }
 
 function parseNumber(val: unknown): [boolean, number] {
