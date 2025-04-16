@@ -3,6 +3,7 @@ import { GPUOriginalMesh } from './GPUOriginalMesh.ts';
 import { NaniteObject } from './naniteObject.ts';
 
 export interface Scene {
+  sceneName: string;
   naniteObjects: NaniteObject[];
   debugMeshes: DebugMeshes;
   fallbackDiffuseTexture: GPUTexture;

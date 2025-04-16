@@ -94,6 +94,7 @@ export async function loadScene(
   const stats = updateSceneStats(naniteObjects);
 
   return {
+    sceneName,
     naniteObjects,
     debugMeshes: debugMeshes!, // was created from first nanite object
     fallbackDiffuseTexture,

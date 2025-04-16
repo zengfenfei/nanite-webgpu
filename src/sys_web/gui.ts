@@ -15,6 +15,8 @@ import { Scene, getDebugTestObject } from '../scene/scene.ts';
 import { Camera } from '../camera.ts';
 import { showHtmlEl } from '../utils/index.ts';
 import { resetNaniteStats } from '../passes/_shared.ts';
+import { SCENES } from '../scene/sceneFiles.ts'
+import { setSceneName } from "./searchParams.ts";
 
 // https://github.com/Scthe/WebFX/blob/master/src/UISystem.ts#L13
 // https://github.com/Scthe/gaussian-splatting-webgpu/blob/master/src/web/gui.ts
@@ -57,6 +59,7 @@ export function initializeGUI(
         "WebGPU does not support atomic<u64> yet. I can't output both depth and color data with just 32 bits. Depth and normals are the best we get. And even that is a squeeze. What you see is the default white color affected by lights."
       );
     },
+    scene: scene.sceneName,
   };
 
   // github
@@ -69,6 +72,10 @@ export function initializeGUI(
   const getGPUStatsCtrl = gui
     .add(dummyObject, 'getGpuDrawStats')
     .name('Get GPU stats');
+
+  gui.add(dummyObject, 'scene',  Object.keys(SCENES)).name('Scene').onChange(() => {
+    setSceneName(dummyObject.scene);
+  });
 
   addNaniteFolder();
   addInstanceCullingFolder();
